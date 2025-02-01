@@ -37,27 +37,31 @@ public class Player {
     public void setHand(List<Card> hand) {
         this.hand = hand;
     }
+
     public void addCard(Card card) {
         hand.add(card);
     }
+
     public void removeCard(Card card) {
         hand.remove(card);
     }
+
     public void addWonCard(Card card) {
         wonCards.add(card);
     }
+
     public Card playCard(String leadingColor) {
+        if (hand.isEmpty()) {
+            throw new IllegalStateException("Cannot play a card before the distribution is complete");
+        }
         if(leadingColor == null) {
             return hand.remove(0);
         }
-        if (!hand.isEmpty()) {
-            for(Card card : hand) {
-                if (card.getColor().equals(leadingColor)) {
-                    return card;
-                }
+        for (int i = 0; i < hand.size(); i++) {
+            if (hand.get(i).getColor().equals(leadingColor)) {
+                return hand.remove(i);
             }
-            return hand.remove(0);
         }
-        return null;
+        return hand.remove(0);
     }
 }

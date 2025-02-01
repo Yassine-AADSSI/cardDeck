@@ -124,7 +124,6 @@ public class Game {
         for (Player player : this.players) {
             if(!player.getName().equals(lastWinner.getName())) {
                 playedCard = player.playCard(playedCard.getColor());
-                player.removeCard(playedCard);
                 playedCards.add(playedCard);
                 // Comparer les cartes
                 if (playedCard.compareTo(bestCard) > 0 && playedCard.getColor().equals(bestCard.getColor())) {
